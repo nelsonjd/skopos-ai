@@ -3,6 +3,9 @@
 ## Build Setup
 
 ```bash
+# navigate to directory
+$ cd skopos-ui
+
 # install dependencies
 $ npm install
 
