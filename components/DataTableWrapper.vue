@@ -1,25 +1,28 @@
 <!-- Please remove this file from your project -->
 <template>
-<DataTable
-  :header-fields="getHeaderFields()"
-  :data="transformedData()"
-  :css="datatableCss">
-</DataTable>
+  <div class="container">
+    <DataTable
+      :header-fields="getHeaderFields()"
+      :data="transformedData()"
+      :css="datatableCss"
+    >
+    </DataTable>
+  </div>
 </template>
 
 <script>
-import { DataTable } from 'v-datatable-light';
+import { DataTable } from "v-datatable-light";
 
 export default {
   name: "DataTableWrapper",
   components: {
-    DataTable
+    DataTable,
   },
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     transformedData() {
@@ -29,33 +32,33 @@ export default {
     getHeaderFields() {
       return [
         {
-          name: 'ticker',
-          label: 'Ticker'
+          name: "ticker",
+          label: "Ticker",
         },
         {
-          name: 't_date',
-          label: 'Date'
+          name: "t_date",
+          label: "Date",
         },
         {
-          name: 'total_return_index',
-          label: 'Total Return Index'
+          name: "total_return_index",
+          label: "Total Return Index",
         },
         {
-          name: 'price',
-          label: 'Price'
+          name: "price",
+          label: "Price",
         },
         {
-          name: 'sector_description',
-          label: 'Sector Description'
+          name: "sector_description",
+          label: "Sector Description",
         },
         {
-          name: 'marketcap',
-          label: 'Market Cap'
+          name: "marketcap",
+          label: "Market Cap",
         },
-      ]
-    }
+      ];
+    },
   },
-  data () {
+  data() {
     return {
       datatableCss: {
         table: "table table-bordered table-hover table-striped table-center",
@@ -65,9 +68,9 @@ export default {
         arrowsWrapper: "arrows-wrapper",
         arrowUp: "arrow up",
         arrowDown: "arrow down",
-        footer: "footer"
-      }
-    }
-  }
+        footer: "footer",
+      },
+    };
+  },
 };
 </script>

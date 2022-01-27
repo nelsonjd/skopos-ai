@@ -1,7 +1,14 @@
 <template>
   <div>
     <h1>Welcome to Skopos AI</h1>
-    <DataTableWrapper :data="data"/>
+    <b-tabs content-class="mt-3">
+      <b-tab title="Table" active>
+        <DataTableWrapper :data="data"/>
+      </b-tab>
+      <b-tab title="Form">
+        <EntryForm />
+      </b-tab>
+    </b-tabs>
   </div>
 </template>
 
