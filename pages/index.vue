@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Welcome to Skopos AI</h1>
-    <DataTableWrapper />
+    <DataTableWrapper :data="data"/>
   </div>
 </template>
 
@@ -10,8 +10,11 @@ export default {
   name: "IndexPage",
   async asyncData({ $content, params }) {
     const data = await $content('price_data_short').fetch();
-    console.log(data);
-    return {};
+    
+    return { data };
+  },
+  methods: {
+
   }
 };
 </script>

@@ -1,8 +1,8 @@
 <!-- Please remove this file from your project -->
 <template>
 <DataTable
-  :header-fields="headerFields"
-  :data="data">
+  :header-fields="getHeaderFields()"
+  :data="transformedData()">
 </DataTable>
 </template>
 
@@ -14,27 +14,43 @@ export default {
   components: {
     DataTable
   },
-  data: function() {
-    return {
-      data: [
-        {
-          ticker: 'GOOG',
-          price: 12.3
-        },
-        {
-          ticker: 'AAPL',
-          price: 30.3
-        }
-      ],
-      headerFields: [
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    transformedData() {
+      const rawData = this.data.body;
+      return rawData;
+    },
+    getHeaderFields() {
+      return [
         {
           name: 'ticker',
-          label: 'Ticker',
+          label: 'Ticker'
+        },
+        {
+          name: 't_date',
+          label: 'Date'
+        },
+        {
+          name: 'total_return_index',
+          label: 'Total Return Index'
         },
         {
           name: 'price',
           label: 'Price'
-        }
+        },
+        {
+          name: 'sector_description',
+          label: 'Sector Description'
+        },
+        {
+          name: 'marketcap',
+          label: 'Market Cap'
+        },
       ]
     }
   }
