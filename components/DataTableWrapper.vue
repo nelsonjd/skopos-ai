@@ -3,7 +3,7 @@
   <div class="container">
     <DataTable
       :header-fields="getHeaderFields()"
-      :data="transformedData()"
+      :data="data"
       :css="datatableCss"
     >
     </DataTable>
@@ -20,7 +20,7 @@ export default {
   },
   props: {
     data: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },

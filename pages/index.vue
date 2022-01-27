@@ -3,10 +3,10 @@
     <h1>Welcome to Skopos AI</h1>
     <b-tabs content-class="mt-3">
       <b-tab title="Table" active>
-        <DataTableWrapper :data="data"/>
+        <DataTableWrapper :data="tableData()"/>
       </b-tab>
       <b-tab title="Form">
-        <EntryForm />
+        <EntryForm :tickers="getTickers()"  />
       </b-tab>
     </b-tabs>
   </div>
@@ -21,7 +21,15 @@ export default {
     return { data };
   },
   methods: {
-
+    getTickers() {
+      return this.tableData().map(datum =>
+      {
+        return datum.ticker;
+      });
+    },
+    tableData() {
+      return this.data.body;
+    },
   }
 };
 </script>
