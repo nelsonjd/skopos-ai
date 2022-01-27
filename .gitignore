@@ -88,3 +88,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+
+content/price_data_short.csv
+content/price_data.csv
