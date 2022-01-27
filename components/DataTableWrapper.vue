@@ -2,7 +2,8 @@
 <template>
 <DataTable
   :header-fields="getHeaderFields()"
-  :data="transformedData()">
+  :data="transformedData()"
+  :css="datatableCss">
 </DataTable>
 </template>
 
@@ -52,6 +53,20 @@ export default {
           label: 'Market Cap'
         },
       ]
+    }
+  },
+  data () {
+    return {
+      datatableCss: {
+        table: "table table-bordered table-hover table-striped table-center",
+        theadTh: "header-item",
+        thWrapper: "th-wrapper",
+        thWrapperCheckboxes: "th-wrapper checkboxes",
+        arrowsWrapper: "arrows-wrapper",
+        arrowUp: "arrow up",
+        arrowDown: "arrow down",
+        footer: "footer"
+      }
     }
   }
 };
