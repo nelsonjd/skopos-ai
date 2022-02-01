@@ -13,12 +13,17 @@
 </template>
 
 <script>
+import { csv }from 'd3-fetch';
+
 export default {
   name: "IndexPage",
-  async asyncData({ $content, params }) {
-    const data = await $content('price_data_short').fetch();
-    
-    return { data };
+  data() {
+    return {
+      dataSeries: []
+    };
+  },
+  async fetch() {
+    this.dataSeries = [];
   },
   methods: {
     getTickers() {
@@ -28,7 +33,7 @@ export default {
       });
     },
     tableData() {
-      return this.data.body;
+      return [];
     },
   }
 };

@@ -35,8 +35,6 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
-    // https://go.nuxtjs.dev/content
-    '@nuxt/content',
   ],
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -44,5 +42,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    transpile: ['d3-fetch', 'd3-dsv']
+  },
 }

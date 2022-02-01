@@ -1,15 +1,6 @@
 <template>
   <div class="container">
     <b-form @submit="onSubmit">
-      <b-form-group id="input-group-1" label="Tickers" label-for="input-1">
-        <b-form-select
-          id="input-1"
-          v-model="form.portfolio"
-          :options="options"
-          multiple
-          :select-size="4"
-        ></b-form-select>
-      </b-form-group>
       <b-form-group
         id="input-group-2"
         label="Insert a Ticker"
@@ -18,36 +9,35 @@
         <b-form-input
           id="input-2"
           v-model="form.entry"
+          v-on:input="clear"
           placeholder="Enter ticker symbol"
         ></b-form-input>
+        <span class="error-message" v-if="form.errorPresent">Invalid Entry</span>
       </b-form-group>
       <b-form-group>
-        <b-button v-on:click="onAdd()" variant="secondary"
-          >Add Ticker</b-button
-        >
+        <b-button v-on:click="onAdd()" variant="secondary">Add Ticker</b-button>
       </b-form-group>
-      <b-form-group>
-        <div class="container">
-          <h4>Portfolio Selections</h4>
-          <div class="row">
-            <div class="col-sm">
-              <b>Ticker</b>
-            </div>
-            <div class="col-sm">
-              <b>Weighting</b>
-            </div>
+
+      <h4>Portfolio Selections</h4>
+      <b-container>
+        <b-row>
+          <b-col>
+            <b>Ticker</b>
+          </b-col>
+          <div class="col-sm">
+            <b>Weighting</b>
           </div>
-          <div v-for="stock in form.portfolio" :key="stock" class="row">
-            <div class="col-sm">
-              {{ stock }}
-            </div>
-            <div class="col-sm">
-              {{ getWeighting() }}%
-            </div>
-          </div>
-        </div>
-      </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+        </b-row>
+        <b-row v-for="stock in form.portfolio" :key="stock" class="row">
+          <b-col>
+            {{ stock }}
+          </b-col>
+          <b-col>{{ getWeighting() }}%</b-col>
+        </b-row>
+      </b-container>
+      <b-form-row class="py-5">
+        <b-button type="submit" variant="primary">Submit</b-button>
+      </b-form-row>
     </b-form>
   </div>
 </template>
@@ -59,6 +49,7 @@ export default {
       form: {
         portfolio: [],
         entry: "",
+        errorPresent: false
       },
       options: this.tickers,
     };
@@ -74,14 +65,32 @@ export default {
       event.preventDefault();
     },
     onAdd() {
-      this.tickers.push(this.form.entry);
+      if (!this.valid(this.form.entry)) {
+        this.form.errorPresent = true;
+        return;
+      }
+      this.form.portfolio.push(this.form.entry);
       this.form.entry = "";
     },
     getWeighting() {
       const number = this.form.portfolio.length;
       const percentage = Math.floor(100 / number);
       return percentage;
+    },
+    valid(entry) {
+      const failsWhitespace = /\s+/.test(entry);
+      const upperEntry = entry.toUpperCase()
+      return upperEntry === entry && !failsWhitespace;
+    },
+    clear(event) {
+      this.form.errorPresent = false;
     }
   },
 };
 </script>
+
+<style scoped>
+.error-message {
+  color: red;
+}
+</style>
