@@ -28,9 +28,9 @@
             <b>Weighting</b>
           </div>
         </b-row>
-        <b-row v-for="stock in form.portfolio" :key="stock" class="row">
+        <b-row v-for="weighting in form.weightings" :key="weighting.ticker" class="row">
           <b-col>
-            {{ stock }}
+            {{ weighting.ticker }}
           </b-col>
           <b-col>{{ getWeighting() }}%</b-col>
         </b-row>
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       form: {
-        portfolio: [],
+        weightings: this.weightings,
         entry: "",
         errorPresent: false
       },
@@ -55,7 +55,7 @@ export default {
     };
   },
   props: {
-    tickers: {
+    weightings: {
       type: Array,
       required: true,
     },
@@ -63,24 +63,30 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      this.$emit('submit', this.form.weightings);
     },
     onAdd() {
       if (!this.valid(this.form.entry)) {
         this.form.errorPresent = true;
         return;
       }
-      this.form.portfolio.push(this.form.entry);
+      this.form.weightings.push(
+        {
+          ticker: this.form.entry,
+          weight: this.getWeighting()
+        }
+      );
       this.form.entry = "";
     },
     getWeighting() {
-      const number = this.form.portfolio.length;
+      const number = this.form.weightings.length;
       const percentage = Math.floor(100 / number);
       return percentage;
     },
     valid(entry) {
       const failsWhitespace = /\s+/.test(entry);
       const upperEntry = entry.toUpperCase()
-      return upperEntry === entry && !failsWhitespace;
+      return upperEntry === entry && !failsWhitespace && entry != "";
     },
     clear(event) {
       this.form.errorPresent = false;

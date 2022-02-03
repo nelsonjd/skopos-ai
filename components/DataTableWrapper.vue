@@ -36,25 +36,9 @@ export default {
           label: "Ticker",
         },
         {
-          name: "t_date",
-          label: "Date",
-        },
-        {
-          name: "total_return_index",
-          label: "Total Return Index",
-        },
-        {
-          name: "price",
-          label: "Price",
-        },
-        {
-          name: "sector_description",
-          label: "Sector Description",
-        },
-        {
-          name: "marketcap",
-          label: "Market Cap",
-        },
+          name: "weight",
+          label: "Weighting"
+        }
       ];
     },
   },
